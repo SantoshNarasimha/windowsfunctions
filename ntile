@@ -1,0 +1,21 @@
+-- table data 
+CREATE TABLE employees (
+  id INT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL
+);
+INSERT INTO employees (id, name)
+VALUES (1, 'Emp1'),
+       (2, 'Emp2'),
+       (3, 'Emp3'),
+       (4, 'Emp4'),
+       (5, 'Emp5'),
+       (6, 'Emp6'),
+       (7, 'Emp7'),
+       (8, 'Emp8');
+
+
+-- QUERY:
+with name as (select name, ntile(4) over(order by name) as bucket from employees),
+	hmm as (select concat(bucket, ' ', name) as okkk, bucket from name)
+select group_concat(okkk) as output from hmm group by bucket;
+select * from employees
