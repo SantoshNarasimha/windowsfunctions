@@ -14,6 +14,10 @@ VALUES (1, 'Emp1'),
        (8, 'Emp8');
 
 
+-- question:
+-- Given a table employees (id, name), create a table employee_pairs (column1, column2) where column1 has employee names from the first row onwards, and column2 has names from subsequent rows (except for the last row which has NULL for column2).
+
+
 -- QUERY:
 with name as (select name, ntile(4) over(order by name) as bucket from employees),
 	hmm as (select concat(bucket, ' ', name) as okkk, bucket from name)
